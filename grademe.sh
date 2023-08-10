@@ -16,7 +16,7 @@
 PATH_TEST="$(cd "$(dirname "$0")" && pwd -P)"
 
 #exec 6>&2 2>/dev/null
-exec 2> /dev/null
+#exec 2> /dev/null
 
 source ${PATH_TEST}/srcs/variables/core.sh
 
@@ -127,7 +127,7 @@ fi
 check_my_config_file
 source ${PATH_TEST}/my_config.sh
 copying_files
-clear
+#clear
 init_deepthought
 set_makefile_var
 
@@ -142,6 +142,9 @@ fi
 
 if [ -e ${PATH_LIBFT}/libft.a ]
 then
+	echo "In does exist"
+	echo ${PATH_LIBFT}
+	ls -la ${PATH_LIBFT}
 	LIB_CONTENT=$(nm -g ${PATH_LIBFT}/libft.a)
 	activate_functions
 	activate_part
@@ -155,9 +158,14 @@ then
 	printf "#include \"libft.h\"\n\nint\tmain(void)\n{\n\treturn (0);\n}" > ${PATH_TEST}/main_check_forbidden_function.c
 	launch_tests
 	print_footer
+	echo "tests"
 else
+	echo "X In does not exist"
 	print_header "STARTING TESTS"
 	printf "\n${RED}Tests can't be started. Missing ${BOLD}${PURPLE}libft.a${DEFAULT}${RED} file${DEFAULT}\n\n"
 	rm_files
 fi
 print_deepthought_message_and_clean
+echo ${PATH_LIBFT}
+echo ${PATH_TEST}
+echo "end toto"

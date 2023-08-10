@@ -18,6 +18,8 @@ activate_functions()
 {
 	for part in ${tab_all_part[*]}
 	do
+		echo "In activate functions content part is"
+		echo ${part}
 		opt_part=$(echo OPT_NO_${part} | tr '[:lower:]' '[:upper:]' | rev | cut -c 6- | rev)
 		if [ ${!opt_part} -eq 0 ]
 		then

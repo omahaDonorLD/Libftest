@@ -21,6 +21,10 @@ test_function()
 	let	"total=0"
 	for function in ${!1}
 	do
+		echo ${part}
+		echo $i
+		echo $(( ${part}_activation[$i] ))
+		set -x
 		if [ $(( ${part}_activation[$i] )) -eq 1 ]
 		then
 		let	"total += 1"
@@ -86,15 +90,20 @@ test_function()
 			fi
 		fi
 		let	"i += 1"
+		#echo "here is the content"
+		#echo ${part}
+		set +x
 	done
 	printf "\n${COLOR_TOTAL}Total : ${success}/${total}${DEFAULT}\n"
 }
 # launch tests
 launch_tests()
 {
+	echo "in launch_tests of file srcs/test_functions"
 	for part in ${tab_all_part[*]}
 	do
 		activate_part=$(echo ACTIVATE_${part} | tr '[:lower:]' '[:upper:]' | rev | cut -c 6- | rev)
+		set -x
 		if [ ${!activate_part} -eq 1 ]
 		then
 			text="= ${part}tions "
@@ -103,5 +112,6 @@ launch_tests()
 			printf "\n" >> ${PATH_DEEPTHOUGHT}/deepthought
 			test_function $(echo ${part}[*])
 		fi
+		set +x
 	done
 }

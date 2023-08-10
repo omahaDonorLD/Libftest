@@ -19,11 +19,16 @@ copying_files()
 		rm -rf ${PATH_TEST}/${TMP_TESTS_DIR}
 	fi
 	printf "Copying files...\nPlease wait a moment.\n"
+	echo ${PATH_LIBFT}
+	ls -la ${PATH_LIBFT}
+	echo ${PATH_TEST}
+	set -x
 	mkdir ${PATH_TEST}/${TMP_TESTS_DIR}
 	cp -r ${PATH_LIBFT}/* ${PATH_TEST}/${TMP_TESTS_DIR}
 	#find ${PATH_LIBFT} -type f -name "*.[ch]" -print | xargs cp -t ${PATH_TEST}/dirlibft
 	find ${PATH_LIBFT} -type f -name "*.[ch]" -exec cp {} ${PATH_TEST}/${TMP_TESTS_DIR}  \;
 	PATH_LIBFT=${PATH_TEST}/${TMP_TESTS_DIR}
+	set +x
 }
 
 set_makefile_var()
@@ -78,6 +83,7 @@ rm_files()
 
 	if [ -d ${PATH_TEST}/${TMP_TESTS_DIR} ]
 	then
-		rm -rf ${PATH_TEST}/${TMP_TESTS_DIR}
+		echo "not going to erase anything"
+		#rm -rf ${PATH_TEST}/${TMP_TESTS_DIR}
 	fi
 }
